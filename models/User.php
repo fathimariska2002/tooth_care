@@ -54,7 +54,7 @@ class User extends BaseModel
         );
     }
 
-    function createUser($username, $password, $permission, $email, $is_active = 0)
+    function createUser($username, $password, $permission, $email, $is_active = 1)
     {
         $userModel = new User();
 
@@ -71,8 +71,9 @@ class User extends BaseModel
         $user->permission = $permission;
         $user->email = $email;
         $user->is_active = $is_active;
+        $user->addNewRec();
 
-        if ($user->addNewRec()) {
+        if ($user) {
             return true; // User created successfully
         } else {
             return false; // User creation failed (likely due to database error)
